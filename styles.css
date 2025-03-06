@@ -433,26 +433,122 @@ button:disabled {
     transform: none !important;
 }
 
-/* 添加触摸反馈 */
+/* 移动端触摸反馈增强 */
 @media (hover: none) {
-    .add-to-cart-btn:active,
-    .cart-item-controls button:active,
-    .checkout-btn:active,
-    .modal-buttons button:active,
-    .cart-icon:active {
+    /* 按钮基础样式增强 */
+    .add-to-cart-btn,
+    .checkout-btn,
+    .cart-item-controls button,
+    .modal-buttons button {
         -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        user-select: none;
+    }
+
+    /* 加入购物车按钮触摸效果 */
+    .add-to-cart-btn:active {
+        transform: scale(0.92);
+        opacity: 0.7;
+        background-color: #059e4f;
+        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 购物车控制按钮触摸效果 */
+    .cart-item-controls button:active {
+        transform: scale(0.85);
+        background-color: #e8e8e8;
+        border-color: #bbb;
+        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 结算按钮触摸效果 */
+    .checkout-btn:active {
+        transform: scale(0.95);
+        opacity: 0.7;
+        background-color: #059e4f;
+        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 模态框按钮触摸效果 */
+    .modal-buttons button:active {
+        transform: scale(0.92);
+        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal-buttons button:first-child:active {
+        background-color: #059e4f;
+        opacity: 0.8;
+    }
+
+    .modal-buttons button:last-child:active {
+        background-color: #ddd;
+    }
+
+    /* 购物车图标触摸效果 */
+    .cart-icon:active {
+        transform: scale(0.85);
+        background-color: rgba(0,0,0,0.15);
+        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 涟漪效果增强 */
+    @keyframes mobile-ripple {
+        to {
+            transform: scale(8);
+            opacity: 0;
+        }
+    }
+
+    .add-to-cart-btn:active::after,
+    .cart-item-controls button:active::after,
+    .checkout-btn:active::after,
+    .modal-buttons button:active::after {
+        animation: mobile-ripple 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.7);
+    }
+
+    .cart-item-controls button:active::after {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    /* 按钮阴影效果增强 */
+    .add-to-cart-btn,
+    .checkout-btn,
+    .modal-buttons button:first-child {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .add-to-cart-btn:active,
+    .checkout-btn:active,
+    .modal-buttons button:first-child:active {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+
+    /* 添加触摸时的背景过渡效果 */
+    .menu-item {
+        position: relative;
+        z-index: 1;
+    }
+
+    .menu-item:active {
+        background-color: #f8f8f8;
+        transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 优化触摸区域 */
+    .cart-item-controls button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .cart-icon {
+        min-width: 44px;
+        min-height: 44px;
     }
 }
 
-/* 添加按下状态的阴影变化 */
-.add-to-cart-btn,
-.checkout-btn,
-.modal-buttons button:first-child {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.add-to-cart-btn:active,
-.checkout-btn:active,
-.modal-buttons button:first-child:active {
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+/* 全局按钮动画优化 */
+button {
+    will-change: transform, opacity, background-color;
+    -webkit-font-smoothing: antialiased;
 } 
