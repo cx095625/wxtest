@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#07c160">
+    <title>在线点餐系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>在线点餐</h1>
+            <div class="cart-icon" onclick="toggleCart(event)">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </header>
+
+        <main>
+            <div id="menu-container" class="menu-container">
+                <!-- 菜品将通过 JavaScript 动态加载 -->
+            </div>
+
+            <div id="cart-panel" class="cart-panel hidden">
+                <h2>购物车</h2>
+                <div id="cart-items" class="cart-items">
+                    <!-- 购物车内容将通过 JavaScript 动态加载 -->
+                </div>
+                <div class="cart-summary">
+                    <div class="total">总计: ¥<span id="total-price">0</span></div>
+                    <button onclick="checkout(event)" class="checkout-btn">结算</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="checkout-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>订单详情</h2>
+            <div id="order-summary"></div>
+            <div class="modal-buttons">
+                <button onclick="copyOrder(event)">复制订单</button>
+                <button onclick="closeModal(event)">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

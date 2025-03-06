@@ -1,0 +1,28 @@
+{
+    "dishes": [
+        {
+            "name": "宫保鸡丁",
+            "price": 38,
+            "image": "kungpao_chicken.jpg",
+            "description": "经典川菜，口感麻辣鲜香"
+        },
+        {
+            "name": "水煮鱼",
+            "price": 58,
+            "image": "boiled_fish.jpg",
+            "description": "新鲜草鱼片，麻辣鲜香"
+        },
+        {
+            "name": "青椒肉丝",
+            "price": 32,
+            "image": "pepper_pork.jpg",
+            "description": "家常小炒，清淡可口"
+        },
+        {
+            "name": "麻婆豆腐",
+            "price": 28,
+            "image": "mapo_tofu.jpg",
+            "description": "川菜经典，香嫩可口"
+        }
+    ]
+} 

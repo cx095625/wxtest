@@ -1,0 +1,458 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --primary-color: #07c160;
+    --danger-color: #fa5151;
+    --text-color: #333333;
+    --text-secondary: #666666;
+    --background-color: #f7f7f7;
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+header {
+    background-color: #fff;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.5rem;
+}
+
+header h1 {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: transparent;
+}
+
+.cart-icon:active {
+    transform: scale(0.9);
+    background-color: rgba(0,0,0,0.1);
+}
+
+#cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--danger-color);
+    color: white;
+    border-radius: 1rem;
+    padding: 0 0.4rem;
+    font-size: 0.75rem;
+    min-width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    margin-top: 3.5rem;
+    padding: 0.5rem;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    padding: 0.5rem;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item-img-container {
+    position: relative;
+    width: 100%;
+    height: 110px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.menu-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-item-img.loaded {
+    opacity: 1;
+}
+
+.menu-item-img.error {
+    padding: 1rem;
+    object-fit: contain;
+    opacity: 0.5;
+}
+
+.menu-item-info {
+    padding: 0.75rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+    color: var(--text-color);
+}
+
+.menu-item-price {
+    color: var(--danger-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.menu-item-description {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    flex-grow: 1;
+}
+
+.add-to-cart-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart-btn:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+    background-color: #06b054;
+}
+
+.cart-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 85%;
+    max-width: 400px;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    padding: 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-panel h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-panel.visible {
+    transform: translateX(0);
+}
+
+.cart-panel.hidden {
+    visibility: hidden;
+}
+
+.cart-items {
+    overflow-y: auto;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-info > div:first-child {
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.cart-item-info > div:last-child {
+    color: var(--danger-color);
+    font-size: 0.9rem;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cart-item-controls button {
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cart-item-controls button:active {
+    transform: scale(0.9);
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+.cart-summary {
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #eee;
+}
+
+.total {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--danger-color);
+}
+
+.checkout-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.checkout-btn:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+    background-color: #06b054;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    visibility: visible;
+}
+
+.modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-content pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 1rem 0;
+}
+
+.modal-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.modal-buttons button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-buttons button:active {
+    transform: scale(0.95);
+}
+
+.modal-buttons button:first-child {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.modal-buttons button:first-child:active {
+    background-color: #06b054;
+    opacity: 0.9;
+}
+
+.modal-buttons button:last-child {
+    background-color: #f5f5f5;
+    color: var(--text-color);
+}
+
+.modal-buttons button:last-child:active {
+    background-color: #e8e8e8;
+}
+
+/* 添加涟漪效果 */
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.add-to-cart-btn::after,
+.cart-item-controls button::after,
+.checkout-btn::after,
+.modal-buttons button::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    display: block;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.add-to-cart-btn:active::after,
+.cart-item-controls button:active::after,
+.checkout-btn:active::after,
+.modal-buttons button:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+/* 禁用状态样式 */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* 添加触摸反馈 */
+@media (hover: none) {
+    .add-to-cart-btn:active,
+    .cart-item-controls button:active,
+    .checkout-btn:active,
+    .modal-buttons button:active,
+    .cart-icon:active {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* 添加按下状态的阴影变化 */
+.add-to-cart-btn,
+.checkout-btn,
+.modal-buttons button:first-child {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.add-to-cart-btn:active,
+.checkout-btn:active,
+.modal-buttons button:first-child:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+} 
