@@ -61,6 +61,7 @@ header h1 {
     border-radius: 50%;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     background-color: transparent;
+    margin-right: 5px;
 }
 
 .cart-icon:active {
@@ -70,18 +71,21 @@ header h1 {
 
 #cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -8px;
+    right: -8px;
     background-color: var(--danger-color);
     color: white;
     border-radius: 1rem;
     padding: 0 0.4rem;
     font-size: 0.75rem;
-    min-width: 1.2rem;
-    height: 1.2rem;
+    min-width: 1.4rem;
+    height: 1.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 2px solid white;
+    z-index: 101;
 }
 
 main {
@@ -573,6 +577,7 @@ button:disabled {
     .cart-icon {
         min-width: 52px;
         min-height: 52px;
+        margin-right: 8px;
     }
 
     /* 添加触摸时的文字效果 */
@@ -596,6 +601,16 @@ button:disabled {
     .checkout-btn:active span,
     .modal-buttons button:active span {
         transform: translateY(1px);
+    }
+
+    #cart-count {
+        top: -10px;
+        right: -10px;
+        min-width: 1.6rem;
+        height: 1.6rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 2.5px solid white;
     }
 }
 
