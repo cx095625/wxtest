@@ -41,6 +41,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 3.5rem;
+    overflow: visible;
 }
 
 header h1 {
@@ -62,6 +63,7 @@ header h1 {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     background-color: transparent;
     margin-right: 5px;
+    margin-top: 5px;
 }
 
 .cart-icon:active {
@@ -71,7 +73,7 @@ header h1 {
 
 #cart-count {
     position: absolute;
-    top: -8px;
+    top: -6px;
     right: -8px;
     background-color: var(--danger-color);
     color: white;
@@ -578,6 +580,7 @@ button:disabled {
         min-width: 52px;
         min-height: 52px;
         margin-right: 8px;
+        margin-top: 8px;
     }
 
     /* 添加触摸时的文字效果 */
@@ -604,7 +607,7 @@ button:disabled {
     }
 
     #cart-count {
-        top: -10px;
+        top: -8px;
         right: -10px;
         min-width: 1.6rem;
         height: 1.6rem;
